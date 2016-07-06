@@ -121,4 +121,6 @@ private:
 
 }
 
+#include "../src/webserver/vlp16_webserver_services.inl"
+
 #endif // VLP16_WEBSERVER_SERVICES_H

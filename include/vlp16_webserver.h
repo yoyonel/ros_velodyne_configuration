@@ -3,11 +3,11 @@
 
 #include <velodyne_webserver.h>
 
-#include "velodyne_configuration/VLP16_SettingsService.h"
-#include "velodyne_configuration/VLP16_StatusService.h"
-#include "velodyne_configuration/VLP16_DiagnosticsService.h"
-#include "velodyne_configuration/VLP16_DiagnosticsRawService.h"
-#include "velodyne_configuration/VLP16_settingsConfig.h"
+#include <velodyne_configuration/VLP16_SettingsService.h>
+#include <velodyne_configuration/VLP16_StatusService.h>
+#include <velodyne_configuration/VLP16_DiagnosticsService.h>
+#include <velodyne_configuration/VLP16_DiagnosticsRawService.h>
+#include <velodyne_configuration/VLP16_settingsConfig.h>
 
 #include <boost/assign.hpp>
 
@@ -23,6 +23,9 @@ using namespace velodyne_webserver;
 //#define DEFAULT_WEBSERVER_CONNECTION_TYPE   WebServerConnectionType::BOOST_ASIO_SYNCHRONOUS
 
 
+/**
+ * @brief The VLP16_WebServer class
+ */
 class VLP16_WebServer: public Velodyne_WebServer
 {
 public:

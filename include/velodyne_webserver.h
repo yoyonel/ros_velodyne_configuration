@@ -5,18 +5,11 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-//#include <boost/asio.hpp>
 //
 #include "enum.h"
 
 #include <ros/ros.h>
 #include <ros/service.h>
-
-//#include "velodyne_configuration/VLP16_SettingsService.h"
-//#include "velodyne_configuration/VLP16_StatusService.h"
-//#include "velodyne_configuration/VLP16_DiagnosticsService.h"
-//#include "velodyne_configuration/VLP16_DiagnosticsRawService.h"
-//#include "velodyne_configuration/VLP16_settingsConfig.h"
 
 
 namespace pt = boost::property_tree;
@@ -30,25 +23,37 @@ namespace velodyne_webserver {
 //// -------------------------------------------
 //#define stringify( name ) # name
 
+/**
+ * @brief BETTER_ENUM
+ */
 BETTER_ENUM( _WebServerCommands, char,
              settings=1,
              status,
              info,
              diag
-             )
+             );
 
+/**
+ * @brief BETTER_ENUM
+ */
 BETTER_ENUM( _LaserReturns, char,
              Strongest=0,
              Last,
              Dual
-             )
+             );
 
+/**
+ * @brief BETTER_ENUM
+ */
 BETTER_ENUM( _WebServerConnectionType, char,
              BOOST_ASIO_SYNCHRONOUS=0,
              BOOST_ASIO_ASYNCHRONOUS,
              CURL
         );
 
+/**
+ * @brief The Velodyne_WebServer class
+ */
 class Velodyne_WebServer
 {
 public:
@@ -57,7 +62,6 @@ public:
     typedef _WebServerCommands WebServerCommands;
     typedef _LaserReturns LaserReturns;
     typedef _WebServerConnectionType WebServerConnectionType;
-
 
 public:
     // -------------------------------------------

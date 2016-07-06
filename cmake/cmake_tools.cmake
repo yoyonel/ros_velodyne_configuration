@@ -1,3 +1,5 @@
+include(cmake_tools_for_ros)
+
 macro(add_flags SRC_FILES FLAGS)
 #  MESSAGE("Flags list to add: ${FLAGS}")
 #  MESSAGE("to this sources files:")
@@ -15,6 +17,8 @@ macro(add_std_cxx11_flag SRC_FILES)
   add_flags("${SRC_FILES}" "-std=c++11")
 endmacro()
 
+
+################################################################################################################
 function(SUBITEM_ADD)
   # url: https://cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
   set(options
@@ -24,7 +28,8 @@ function(SUBITEM_ADD)
       USE_PTHREAD
       ADD_FLAG_FOR_CXX_11
       ADD_FLAG_FOR_CXX_14
-      PRINT_DEBUG)
+      PRINT_DEBUG
+    )
   set(oneValueArgs NAME)
   set(multiValueArgs SRC)
   cmake_parse_arguments(SUBITEM_ADD "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
@@ -108,4 +113,4 @@ function(SUBITEMS_ADD_LIBRARIES NAMES_SAMPLES FLAGS_FOR_SAMPLES)
     )
   endforeach()
 endfunction()
-
+################################################################################################################

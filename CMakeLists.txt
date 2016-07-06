@@ -9,12 +9,17 @@ set(${PROJECT_NAME}_CATKIN_DEPS
     roscpp
     message_generation
     std_msgs
-    dynamic_reconfigure)
+    dynamic_reconfigure
+)
 #
 find_package(catkin REQUIRED COMPONENTS ${${PROJECT_NAME}_CATKIN_DEPS})
 
 
-# ROS Messages
+################################################
+## Declare ROS messages, services and actions ##
+################################################
+
+## Generate messages in the 'msg' folder
 add_message_files(
   DIRECTORY msg
   FILES
@@ -26,6 +31,7 @@ add_message_files(
   VLP16_SettingsMessage.msg
 )
 
+## Generate services in the 'srv' folder
 add_service_files(
   DIRECTORY srv
   FILES
@@ -37,12 +43,17 @@ add_service_files(
   VLP16_SettingsService.srv
 )
 
-# ROS Dynamic Reconfigure Parameter
+## Generate added messages and services with any dependencies listed here
+generate_messages(DEPENDENCIES std_msgs)
+
+################################################
+## Declare ROS dynamic reconfigure parameters ##
+################################################
+
+## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
   cfg/VLP16_settings.cfg
 )
-
-generate_messages(DEPENDENCIES std_msgs)
 
 ###################################
 ## catkin specific configuration ##
@@ -59,89 +70,34 @@ catkin_package(
   CATKIN_DEPENDS message_runtime std_msgs
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+###########
+## Build ##
+###########
+
+## Specify additional locations of header files
+## Your package locations should be listed before other locations
+include_directories(
+    include
+    ${catkin_INCLUDE_DIRS}
+)
 
 add_subdirectory(src/lib)
 
-##############################
-## Velodyne settings server ##
-##############################
-add_std_cxx11_flag("src/settings/settings_server.cc")
-add_executable(velodyne_settings_server
-    src/settings/settings_server.cc)
-target_link_libraries(velodyne_settings_server
-    velodyne_tools
-    vlp16_settings
-    ${catkin_LIBRARIES})
-add_dependencies(velodyne_settings_server ${catkin_EXPORTED_TARGETS})
-
-## install runtime files
-#install(TARGETS velodyne_settings_server
-#     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#     COMPONENT main
-#)
-## Mark cpp header files for installation
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-  PATTERN ".svn" EXCLUDE
-)
-
-##############################
-
-##############################
-## Velodyne status server   ##
-##############################
-add_std_cxx11_flag("src/status/status_server.cc")
-
-add_executable(velodyne_status_server
-    src/status/status_server.cc)
-target_link_libraries(velodyne_status_server
-    velodyne_tools
-#    velodyne_status
-    ${catkin_LIBRARIES})
-add_dependencies(velodyne_status_server ${catkin_EXPORTED_TARGETS})
-
-## install runtime files
-#install(TARGETS velodyne_status_server
-#     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#     COMPONENT main
-#)
-## Mark cpp header files for installation
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-  PATTERN ".svn" EXCLUDE
-)
-
-##############################
-
-
-###################################
-## Velodyne diagnostics server   ##
-###################################
-add_std_cxx11_flag("src/diagnostics/diagnostics_server.cc")
-add_executable(velodyne_diagnostics_server
-    src/diagnostics/diagnostics_server.cc)
-target_link_libraries(velodyne_diagnostics_server
-    velodyne_tools
-#    velodyne_diagnostics
-    ${catkin_LIBRARIES})
-add_dependencies(velodyne_diagnostics_server ${catkin_EXPORTED_TARGETS})
+add_subdirectory(src/settings)
+add_subdirectory(src/status)
+add_subdirectory(src/diagnostics)
+add_subdirectory(src/webserver)
 
 #############
 ## Install ##
 #############
-## install runtime files
-#install(TARGETS velodyne_diagnostics_server
-#     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#     COMPONENT main
-#)
+
+# all install targets should use catkin DESTINATION variables
+# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
+
 ## Mark cpp header files for installation
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
   PATTERN ".svn" EXCLUDE
 )
-
-##############################
