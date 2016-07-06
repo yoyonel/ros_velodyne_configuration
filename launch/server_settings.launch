@@ -1,0 +1,18 @@
+<!-- -*- mode: XML -*- -->
+<!-- start 
+     $Id$
+  -->
+
+<launch>
+
+  <!-- start -->
+  <!-- ros_args.launch -->
+  <arg name="VLP16_NETWORK_SENSOR_IP" default="172.20.0.191" doc="IP du sensor Velodyne VLP16"/>
+  <arg name="model" default="VLP16" doc="Nom du modele du sensor"/>
+
+  <node pkg="velodyne_configuration" type="velodyne_settings_server" name="velodyne_settings_server">
+  	<param name="VLP16_NETWORK_SENSOR_IP" value="$(arg VLP16_NETWORK_SENSOR_IP)"/>
+  </node>
+
+</launch>
+

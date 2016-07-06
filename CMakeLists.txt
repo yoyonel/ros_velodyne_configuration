@@ -81,7 +81,7 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
-add_subdirectory(src/lib)
+add_subdirectory(src/tools)
 
 add_subdirectory(src/settings)
 add_subdirectory(src/status)
@@ -100,4 +100,14 @@ install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
   PATTERN ".svn" EXCLUDE
+)
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  launch/server_status.launch
+  launch/server_settings.launch
+  launch/server_diagnostics.launch
+  launch/servers_configuration.launch
+  # myfile2
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
