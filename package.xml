@@ -1,10 +1,8 @@
+<?xml version="1.0"?>
 <package>
-
   <name>velodyne_configuration</name>
-  <version>1.2.0</version>
-  <description>
-    .
-  </description>
+  <version>0.0.0</version>
+  <description>The velodyne_configuration package</description>
   <maintainer email="lionel.atty@ign.fr">Lionel ATTY</maintainer>
   <author>Lionel ATTY</author>
   <license>BSD</license>
@@ -21,4 +19,9 @@
   <run_depend>message_runtime</run_depend>
   <run_depend>std_msgs</run_depend>
 
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
 </package>

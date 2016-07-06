@@ -3,8 +3,8 @@
 
 #include <dynamic_reconfigure/server.h>
 //
-#include "velodyne_configuration/VLP16_settingsConfig.h"
-#include "velodyne_configuration/VLP16_SettingsService.h"
+#include <velodyne_configuration/VLP16_settingsConfig.h>
+#include <velodyne_configuration/VLP16_SettingsService.h>
 //
 #include <vlp16_webserver_services.h>
 //
