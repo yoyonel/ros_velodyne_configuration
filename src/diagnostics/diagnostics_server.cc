@@ -1,7 +1,6 @@
 #include <ros/ros.h>
 //
 #include <vlp16_webserver_services_diagnostics.h>
-#include <ros_macros.h>
 
 int main(int argc, char **argv)
 {
