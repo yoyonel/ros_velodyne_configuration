@@ -6,7 +6,7 @@
 #include <velodyne_configuration/VLP16_settingsConfig.h>
 #include <velodyne_configuration/VLP16_SettingsService.h>
 //
-#include <vlp16_webserver_services.h>
+#include <vlp16_webserver_services_settings.h>
 //
 #include <boost/thread.hpp>
 

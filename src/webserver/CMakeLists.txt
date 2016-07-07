@@ -6,9 +6,28 @@
 ##############################
 ## Webserver - VLP16        ##
 ##############################
+#
+SET( SRC_WEBSERVER_SERVICES
+    services/vlp16_webserver_services_settings.cpp
+    services/vlp16_webserver_services_status.cpp
+    services/vlp16_webserver_services_diagnostics.cpp
+    services/vlp16_webserver_services.cpp
+)
+
+SET( SRC_WEBSERVER_CONNECTIONS
+    connections/vlp16_webserver_curl.cpp
+    connections/vlp16_webserver_boost_asio_synch.cpp
+    connections/vlp16_webserver_boost_asio_asynch.cpp
+    boost_asio/velodyne_tools_boost_asio.cc
+)
+
 ros_add_library(
     NAME    vlp16_webserver
     SRC     vlp16_webserver.cc
+            ${SRC_WEBSERVER_SERVICES}
+            ${SRC_WEBSERVER_CONNECTIONS}
+# A terme a voir pour retirer cette dépendance de velodyne_tools
+# pas forcement utile ...
     LIBS    velodyne_tools
     DEPENDS velodyne_tools
     ADD_FLAG_FOR_CXX_11

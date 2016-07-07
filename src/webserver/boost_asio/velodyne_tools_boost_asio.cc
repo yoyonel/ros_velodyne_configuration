@@ -1,5 +1,27 @@
 #include <velodyne_tools_boost_asio.h>
 
+
+// Form the request. We specify the "Connection: close" header so that the
+// server will close the socket after transmitting the response. This will
+// allow us to treat all data up until the EOF as the content.
+#define BUILD_REQUEST_GET(request_stream, server, path)     \
+    request_stream << "GET " << path << " HTTP/1.0\r\n";   \
+    request_stream << "Host: " << server << "\r\n";        \
+    request_stream << "Accept: */*\r\n";                   \
+    request_stream << "Connection: close\r\n\r\n";
+
+#define BUILD_REQUEST_POST(request_stream, server, path, xwwwformcoded)         \
+    request_stream << "POST " << path << " HTTP/1.0\r\n";                       \
+    request_stream << "Host: " << server << "\r\n";                             \
+    request_stream << "User-Agent: C/1.0";                                      \
+    request_stream << "Accept: */*\r\n";                                        \
+    request_stream << "Referer: rbose\r\n";                                     \
+    request_stream << "Content-Length: " <<  xwwwformcoded.length() << "\r\n";  \
+    request_stream << "Content-Type: application/x-www-form-urlencoded\r\n";    \
+    request_stream << "Connection: close\r\n\r\n";                              \
+    request_stream << xwwwformcoded;
+
+
 namespace velodyne_tools {
 namespace boost_asio {
 

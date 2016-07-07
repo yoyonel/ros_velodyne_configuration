@@ -8,16 +8,27 @@ namespace vlp16_webserver_services {
 using namespace vlp16_webserver;
 
 //---------------------------------------------------------------------------
-template<class Service, class Message>
-class Velodyne_WebServer_Services : public VLP16_WebServer
+
+/**
+ * @brief The Velodyne_WebServer_Services class
+ */
+template< class ROS_Service, class ROS_Message, class ROS_Response,
+        class TWebServerConnectionType=VLP16_WebServer_BOOST_ASIO_ASYNCHRONOUS >
+class Velodyne_WebServer_Services : public TWebServerConnectionType
 {
 public:
+    /**
+     * @brief Velodyne_WebServer_Services
+     * @param _service_name
+     * @param _nh
+     * @param _loop_rate_value
+     */
     Velodyne_WebServer_Services(
-            const std::string& _service_name,
-            const std::string& _nh="~",
-            const double& _loop_rate_value=DEFAULT_LOOP_RATE_VALUE
+            const std::string&  _service_name,
+            const std::string&  _nh="~",
+            const double&       _loop_rate_value=DEFAULT_LOOP_RATE_VALUE
             );
-
+    
     // urls:
     // - http://stackoverflow.com/questions/26267115/boost-function-instantion-with-nothing
     // - http://www.radmangames.com/programming/how-to-use-boost-function
@@ -26,23 +37,37 @@ public:
             boost::function<bool()> _prePublish=[] () { return true; },
             boost::function<void()> _postPublish=[] () {}
     );
-
+    
     virtual void run_with_test_sub(boost::function<void()> _postPublish=[] () {});
-
+    
+    /**
+     * @brief get_topic_name_pub
+     * @return
+     */
     inline const std::string& get_topic_name_pub() const { return topic_name_pub_; }
+    /**
+     * @brief get_node_name_srv
+     * @return
+     */
     inline const std::string& get_node_name_srv() const { return node_name_srv_; }
-
+    
     // ------------------
     // GETTER/SETTER
     // ------------------
+    /**
+     * @brief defaults_getter_setter
+     */
     defaults_getter_setter(double, loop_rate_value_);
-
-protected:
-    virtual bool get_response(typename Service::Response& _res) = 0;
-    inline bool get_response(typename Service::Request&, typename Service::Response& _res)
-    {
-        return get_response(_res);
-    }
+    
+protected:    
+    // ----------------------
+    // PURE VIRTUAL METHODS
+    // ----------------------
+    virtual bool parse_JSON(const std::string & _res_request, ROS_Response & _res) const    = 0;
+    virtual bool get_response(typename ROS_Service::Response& _res)                         = 0;
+    // ----------------------
+    // wrapper pour le bind ROS (2 arguments -> 1)
+    inline bool get_response(typename ROS_Service::Request&, typename ROS_Service::Response& _res) { return get_response(_res); }
 
 protected:
     //
@@ -54,11 +79,18 @@ protected:
     //
     ros::ServiceServer velodyne_service_srv_;
     std::string node_name_srv_;
-
-private:
-    //! Private NodeHandle
-    typename Service::Response laser_data_;
+    //
+    typename ROS_Service::Response laser_data_;
 };
+
+
+#define VLP16_ROS_CONSTRUCT_TUPLE(_ns, _name, _service, _message, _serviceresponse)    \
+    _ns::VLP16_##_name##_service,        \
+    _ns::VLP16_##_name##_message,        \
+    _ns::VLP16_##_name##_serviceresponse \
+
+#define VLP16_ROS_TRIPLET_SMSR(_ns, _name)    \
+    VLP16_ROS_CONSTRUCT_TUPLE(_ns, _name, Service, Message, ServiceResponse)
 
 //----------------------
 // Typedef sur les spécialisations de la classe template Velodyne_WebServer_Services
@@ -66,61 +98,11 @@ private:
 // - 'Settings'
 // - 'Status'
 // - 'Diagnostics'
-typedef Velodyne_WebServer_Services<velodyne_configuration::VLP16_DiagnosticsService, velodyne_configuration::VLP16_DiagnosticsMessage> S_VWS_Diagnostics;
-typedef Velodyne_WebServer_Services<velodyne_configuration::VLP16_StatusService, velodyne_configuration::VLP16_StatusMessage> S_VWS_Status;
-typedef Velodyne_WebServer_Services<velodyne_configuration::VLP16_SettingsService, velodyne_configuration::VLP16_SettingsMessage> S_VWS_Settings;
-
-//---------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-class Velodyne_WebServer_Status : public S_VWS_Status
-{
-public:
-    Velodyne_WebServer_Status(
-            const std::string&  _name="status",
-            const std::string&  _nh="~",
-            const double&       _loop_rate_val=DEFAULT_LOOP_RATE_VALUE
-            );
-
-    void run();
-
-protected:
-    bool get_response(velodyne_configuration::VLP16_StatusServiceResponse& _res);
-};
-//---------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-class Velodyne_WebServer_Settings : public S_VWS_Settings
-{
-public:
-    Velodyne_WebServer_Settings(const std::string& _name="settings");
-
-protected:
-    bool get_response(velodyne_configuration::VLP16_SettingsServiceResponse& _res);
-
-private:
-    ros::Subscriber velodyne_settings_sub_;
-};
-//---------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-class Velodyne_WebServer_Diagnostics : public S_VWS_Diagnostics
-{
-public:
-    Velodyne_WebServer_Diagnostics(const std::string& _name="diagnostics");
-
-    void run();
-
-protected:
-    bool get_response(velodyne_configuration::VLP16_DiagnosticsServiceResponse& _res);
-
-private:
-    bool get_diagnostics_raw(velodyne_configuration::VLP16_DiagnosticsRawServiceResponse& _res);
-};
-//---------------------------------------------------------------------------
-
+typedef Velodyne_WebServer_Services< VLP16_ROS_TRIPLET_SMSR(velodyne_configuration, Status)   > S_VWS_Status;
+typedef Velodyne_WebServer_Services< VLP16_ROS_TRIPLET_SMSR(velodyne_configuration, Settings) > S_VWS_Settings;
+typedef Velodyne_WebServer_Services< VLP16_ROS_CONSTRUCT_TUPLE(velodyne_configuration, Diagnostics, Service, Message, RawServiceResponse) > S_VWS_Diagnostics;
 }
 
-#include "../src/webserver/vlp16_webserver_services.inl"
+#include "../src/webserver/services/vlp16_webserver_services.inl"
 
 #endif // VLP16_WEBSERVER_SERVICES_H

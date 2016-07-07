@@ -43,13 +43,13 @@ BETTER_ENUM( _LaserReturns, char,
              );
 
 /**
- * @brief BETTER_ENUM
+ * @brief The _WebServerConnectionType enum
  */
-BETTER_ENUM( _WebServerConnectionType, char,
-             BOOST_ASIO_SYNCHRONOUS=0,
-             BOOST_ASIO_ASYNCHRONOUS,
-             CURL
-        );
+enum _WebServerConnectionType {
+    BOOST_ASIO_SYNCHRONOUS=0,
+    BOOST_ASIO_ASYNCHRONOUS,
+    CURL
+};
 
 /**
  * @brief The Velodyne_WebServer class
@@ -71,14 +71,7 @@ public:
     defaults_getter_setter(std::string, network_sensor_ip_);
 
 protected:
-    // -------------------------------------------
-    // VIRTUAL FUNCTIONS
-    // -------------------------------------------
-    virtual std::string request_webserver(
-            const WebServerCommands &_cmd,
-            WebServerConnectionType _typeConnection
-            ) const = 0;
-    // -------------------------------------------
+    virtual std::string request(const WebServerCommands &_cmd) const = 0;
 
 protected:
     std::string network_sensor_ip_;

@@ -32,7 +32,7 @@ VLP16_Settings::VLP16_Settings() :
 void VLP16_Settings::dyn_reconf_server_cb(VLP16_settingsConfig &config, uint32_t level)
 {
 //    const int return_set_configs = /**webserver_.**/send_settings_to_webserver(config);
-    const int return_set_configs = send_settings_to_webserver(config);
+    const int return_set_configs = send(config);
     ROS_INFO("Reconfigure Request: %d", return_set_configs);
 }
 
