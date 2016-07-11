@@ -67,7 +67,7 @@ public:
     // -------------------------------------------
     // GETTER/SETTER
     // -------------------------------------------
-    defaults_getter_setter(float, max_delay_for_cmd_);
+    defaults_getter_setter(float, max_delay_for_cmd_)
     defaults_getter_setter(std::string, network_sensor_ip_);
 
 protected:

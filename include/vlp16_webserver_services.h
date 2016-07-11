@@ -26,7 +26,8 @@ struct TTripletROS {
 /**
  *
  */
-template<typename tn_ROSTriplet, class TWebServerConnectionType=VLP16_WebServer_BOOST_ASIO_ASYNCHRONOUS >
+template<typename tn_ROSTriplet, class TWebServerConnectionType=VLP16_WebServer_BOOST_ASIO_SYNCHRONOUS >
+//template<typename tn_ROSTriplet, class TWebServerConnectionType=VLP16_WebServer_BOOST_ASIO_ASYNCHRONOUS >
 class Velodyne_WebServer_Services : public TWebServerConnectionType
 {
     // On recupere les types packes dans le typename TripletTypes

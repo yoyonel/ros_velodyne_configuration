@@ -2,13 +2,6 @@
 
 namespace vlp16_webserver_services {
 
-//#define DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES_CONSTRUCTOR()                                                       \
-//    template<class Service, class Message, class Response, class TWebServerConnectionType>                          \
-//    Velodyne_WebServer_Services<Service, Message, Response, TWebServerConnectionType>::Velodyne_WebServer_Services
-
-//#define DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES(_return_typ, _member_name)                                      \
-//    template<class Service, class Message, class Response, class TWebServerConnectionType>                      \
-//    _return_typ Velodyne_WebServer_Services<Service, Message, Response, TWebServerConnectionType>::_member_name
 
 #define DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES_CONSTRUCTOR()                                       \
     template<typename TripletTypes, class TWebServerConnectionType>                                 \
@@ -44,8 +37,6 @@ DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES_CONSTRUCTOR()(
     // Publisher
     //----------------------------------------------------
     topic_name_pub_ = _name + "_pub";
-//    velodyne_service_pub_ = nh_.advertise<Message>(topic_name_pub_, 1000);
-//    velodyne_service_pub_ = nh_.advertise<typename TripletTypes::value_type_rosmessage>(topic_name_pub_, 1000);
     velodyne_service_pub_ = nh_.advertise<Velodyne_WebServer_Services::t_ROS_Message>(topic_name_pub_, 1000);
     //
     ROS_INFO("Publish %s messages.\t[PUBLISHER]", _name.c_str());

@@ -19,6 +19,8 @@ SET( SRC_WEBSERVER_CONNECTIONS
     connections/vlp16_webserver_boost_asio_synch.cpp
     connections/vlp16_webserver_boost_asio_asynch.cpp
     boost_asio/velodyne_tools_boost_asio.cc
+    boost_asio/velodyne_tools_boost_asio_clientsynch.cc
+    boost_asio/velodyne_tools_boost_asio_clientasynch.cc
 )
 
 ros_add_library(

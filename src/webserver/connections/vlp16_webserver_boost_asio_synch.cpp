@@ -1,8 +1,13 @@
 #include <vlp16_webserver.h>
 #include <boost/asio.hpp>
 
+#include <memory>   // for: make_shared
+
+#include <velodyne_tools_boost_asio_clientsynch.h>
 
 using namespace vlp16_webserver;
+using namespace velodyne_tools::boost_asio; // for: ClientASynch
+using namespace std;    // for: make_shared
 
 // ----------------------------------
 // ASIO SYNCH
@@ -14,12 +19,11 @@ std::string VLP16_WebServer_BOOST_ASIO_SYNCHRONOUS::request(
     std::string response_json = "";
     try {
         boost::asio::io_service io_service;
-        velodyne_tools::boost_asio::client_synch c(
-                    io_service,
-                    network_sensor_ip_,
-                    std::string("/cgi/") + _cmd._to_string() + ".json"
-                    );
-        response_json = c.get_response();
+
+        // c++11 style
+        auto http_client = make_shared<ClientSynch>(io_service);
+        http_client->get(network_sensor_ip_, std::string("/cgi/") + _cmd._to_string() + ".json");
+        response_json = http_client->get_response();
     }
     catch (std::exception& e)
     {
@@ -37,12 +41,10 @@ int VLP16_WebServer_BOOST_ASIO_SYNCHRONOUS::send(
     try {
         const std::string xwwwformcoded =  convert_config_to_xwwwformcoded(_config);
         boost::asio::io_service io_service;
-        velodyne_tools::boost_asio::client_synch c(
-                    io_service,
-                    network_sensor_ip_,
-                    "/cgi/setting",
-                    xwwwformcoded
-                    );
+
+        // c++11 style
+        auto http_client = make_shared<ClientSynch>(io_service);
+        http_client->post(network_sensor_ip_, "/cgi/setting", xwwwformcoded);
     }
     catch (std::exception& e)
     {
