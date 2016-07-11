@@ -1,10 +1,17 @@
 #!/usr/bin/python
+# exemple: ./python_request_vlp16.py --params '{"rpm":"311"}'
+
+# urls:
+# - https://docs.python.org/2/howto/argparse.html#the-basics
+# - http://stackoverflow.com/questions/18608812/accepting-a-dictionary-as-an-argument-with-argparse-and-python
+# - http://docs.python-requests.org/en/master/user/advanced/#timeouts
+# - http://docs.python-requests.org/en/master/user/quickstart/#passing-parameters-in-urls
 
 # url: http://docs.python-requests.org/en/master/api/
 import requests
-import time
 import sys
-import getopt
+import argparse
+import json
 
 
 def build_cmd(
@@ -30,6 +37,23 @@ def httprequest_get(
     return r
 
 
+def httprequest_post(
+    network_sensor_ip,
+    service_name,
+    dict_params={}
+):
+    cmd = "http://" + network_sensor_ip + "/cgi/setting"
+    print "cmd for request: ", cmd
+
+    try:
+        r = requests.post(cmd, data=dict_params)
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        sys.exit()
+
+    return r
+
+
 def print_request(r):
     try:
         print "- headers['content-type]: ", r.headers['content-type']
@@ -44,25 +68,31 @@ def version_getopt(argv):
 
     NETWORK_SENSOR_IP = "172.20.0.191"
     SERVICE = "status"
+    PARAMS = {}
 
-    try:
-        opts, args = getopt.getopt(argv, "hi:s:", ["ip_network_sensor=", "service_name="])
-    except getopt.GetoptError:
-        print 'python_request_vlp16.py -i <ip_network_sensor> -s <service_name>'
-        sys.exit()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--ip", type=str, help="ip network sensor")
+    parser.add_argument("-s", "--service", type=str, help="service name")
+    parser.add_argument("-p", "--params", type=json.loads, help="params for post request")
 
-    for opt, arg in opts:
-        print 'ici'
-        if opt == '-h':
-            print 'python_request_vlp16.py -i <ip_network_sensor> -s <service_name>'
-            sys.exit()
-        elif opt in ("-i", "--ip_network_sensor"):
-            NETWORK_SENSOR_IP = arg
-        elif opt in ("-s", "--service_name"):
-            SERVICE = arg
+    args = parser.parse_args()
 
-    r = httprequest_get(NETWORK_SENSOR_IP, SERVICE)
+    if args.ip:
+        NETWORK_SENSOR_IP = args.ip
+    if args.service:
+        SERVICE = args.service
+    if args.params:
+        PARAMS = args.params
+
+    # si on passe des parametres, c'est qu'on souhaite generer un post request
+    if(PARAMS):
+        r = httprequest_post(NETWORK_SENSOR_IP, SERVICE, PARAMS)
+    else:
+        # sinon un get request
+        r = httprequest_get(NETWORK_SENSOR_IP, SERVICE)
+
     print '- status code: ', r.status_code
+
     if r.status_code == 200:
         print_request(r)
 
