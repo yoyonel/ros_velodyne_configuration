@@ -3,10 +3,10 @@
 
 #include <velodyne_webserver.h>
 
-#include <velodyne_configuration/VLP16_SettingsService.h>
-#include <velodyne_configuration/VLP16_StatusService.h>
-#include <velodyne_configuration/VLP16_DiagnosticsService.h>
-#include <velodyne_configuration/VLP16_DiagnosticsRawService.h>
+//#include <velodyne_configuration/VLP16_StatusService.h>
+//#include <velodyne_configuration/VLP16_DiagnosticsService.h>
+//#include <velodyne_configuration/VLP16_DiagnosticsRawService.h>
+//#include <velodyne_configuration/VLP16_SettingsService.h>
 #include <velodyne_configuration/VLP16_settingsConfig.h>
 
 #include <boost/assign.hpp>

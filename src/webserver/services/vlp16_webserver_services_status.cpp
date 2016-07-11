@@ -24,9 +24,11 @@ void Velodyne_WebServer_Status::run()
 {
     // url: http://fr.cppreference.com/w/cpp/language/lambda
     Velodyne_WebServer_Services<
-            velodyne_configuration::VLP16_StatusService,
-            velodyne_configuration::VLP16_StatusMessage,
-            velodyne_configuration::VLP16_StatusServiceResponse>::run(
+//            velodyne_configuration::VLP16_StatusService,
+//            velodyne_configuration::VLP16_StatusMessage,
+//            velodyne_configuration::VLP16_StatusServiceResponse
+            TTripletROS_Status
+            >::run(
                 boost::function<bool()>( [this](){ return velodyne_service_pub_.getNumSubscribers() != 0; } )
                 );
 }

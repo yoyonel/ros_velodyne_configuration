@@ -3,16 +3,32 @@
 using namespace vlp16_webserver_services;
 
 
+// TODO: Test Meta-Prog avec BOOST
+// urls:
+// - http://www.boost.org/doc/libs/1_38_0/libs/preprocessor/doc/ref/seq_for_each.html
+// - http://www.boost.org/doc/libs/1_38_0/libs/preprocessor/doc/ref/list_for_each_i.html
+// ------------------------------------------------------------------------------------------
+#define ROS_NAMES (Diagnostics)
+#define ROS_CLASS (Service, Message, RawServiceResponse)
+//#define PREFIX velodyne_configuration::VLP16_
+
+#define BOOST_PP_BUILD_LIST_PRODUCT(L1, L2) \
+    BOOST_PP_LIST_FOR_EACH_PRODUCT(BOOST_PP_LIST_APPEND, 2, (BOOST_PP_TUPLE_TO_LIST(L1), BOOST_PP_TUPLE_TO_LIST(L2)))
+
+#define BOOST_PP_MACRO_FOREACH_I(r, _, TUPLE_ROSNAMECLASS) ;
+
+#define BOOST_PP_PRODUCE_LIST(L1, L2) \
+    BOOST_PP_LIST_FOR_EACH_I(BOOST_PP_MACRO_FOREACH_I, _, BOOST_PP_BUILD_LIST_PRODUCT(L1, L2))
+// ------------------------------------------------------------------------------------------
+
+
 Velodyne_WebServer_Diagnostics::Velodyne_WebServer_Diagnostics(const std::string& _name) : Velodyne_WebServer_Services(_name )
 {
 }
 
 void Velodyne_WebServer_Diagnostics::run()
 {
-    Velodyne_WebServer_Services<
-            VLP16_DiagnosticsService,
-            VLP16_DiagnosticsMessage,
-            VLP16_DiagnosticsRawServiceResponse>::run_with_test_sub();
+    Velodyne_WebServer_Services<TTripletROS_Diagnostics>::run_with_test_sub();
 }
 
 bool Velodyne_WebServer_Diagnostics::get_diagnostics_raw(velodyne_configuration::VLP16_DiagnosticsRawServiceResponse& _res) const

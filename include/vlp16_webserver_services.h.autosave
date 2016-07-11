@@ -118,16 +118,16 @@ protected:
 #define PPCAT_NX(A, B) A ## B
 #define PPCAT(A, B) PPCAT_NX(A, B)
 
+#define BOOST_PP_TUPLE_ELEM2(index, tuple) BOOST_PP_TUPLE_ELEM(2, index, tuple)
+
+#define BOOST_PP_STRINGIFY_TUPLE2(tuple) \
+    PPCAT(BOOST_PP_TUPLE_ELEM2(0, tuple), BOOST_PP_TUPLE_ELEM2(1, tuple))
+
 #define BOOST_PP_SFPT_BUILD_STRUCT_DECL(_ros_nameclass, _prefix)         \
     struct PPCAT(TRos, _ros_nameclass)                  \
     : public PPCAT(_prefix, _ros_nameclass) {           \
     typedef PPCAT(_prefix, _ros_nameclass) value_type;  \
     };
-
-#define BOOST_PP_TUPLE_ELEM2(index, tuple) BOOST_PP_TUPLE_ELEM(2, index, tuple)
-
-#define BOOST_PP_STRINGIFY_TUPLE2(tuple) \
-    PPCAT(BOOST_PP_TUPLE_ELEM2(0, tuple), BOOST_PP_TUPLE_ELEM2(1, tuple))
 
 #define BOOST_PP_SFPT_BUILD_STRUCT(tuple_ros_nameclass, _prefix) \
     BOOST_PP_SFPT_BUILD_STRUCT_DECL(BOOST_PP_STRINGIFY_TUPLE2(tuple_ros_nameclass), _prefix)
