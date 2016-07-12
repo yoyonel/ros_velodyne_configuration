@@ -21,8 +21,8 @@ public:
     // ----------------
     // OVERRIDES
     // ----------------
-    int handle_request_for_GET(const std::string& _server, const std::string& _path) override;
-    int handle_request_for_POST(const std::string& _server, const std::string& _path, const std::string& _xwwwformcoded) override;
+    int get(const std::string& _server, const std::string& _path) override;
+    int post(const std::string& _server, const std::string& _path, const std::string& _xwwwformcoded) override;
     // ----------------
 
 private:

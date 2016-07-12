@@ -97,7 +97,7 @@ int SynchHTTPClientImp::perform_request(const std::string& _server)
     return retour;
 }
 
-int SynchHTTPClientImp::handle_request_for_GET(const std::string& _server,
+int SynchHTTPClientImp::get(const std::string& _server,
                                                const std::string& _path)
 {
     BUILD_REQUEST_GET(request_stream_, _server, _path);
@@ -107,7 +107,7 @@ int SynchHTTPClientImp::handle_request_for_GET(const std::string& _server,
 
 }
 
-int SynchHTTPClientImp::handle_request_for_POST(const std::string& _server,
+int SynchHTTPClientImp::post(const std::string& _server,
                                                 const std::string& _path,
                                                 const std::string& _xwwwformcoded)
 {

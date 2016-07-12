@@ -22,8 +22,8 @@ public:
     // ----------------
     // PURES VIRTUALS
     // ----------------
-    virtual int handle_request_for_GET(const std::string& _server, const std::string& _path) = 0;
-    virtual int handle_request_for_POST(const std::string& _server, const std::string& _path, const std::string& _xwwwformcoded) = 0;
+    virtual int get(const std::string& _server, const std::string& _path) = 0;
+    virtual int post(const std::string& _server, const std::string& _path, const std::string& _xwwwformcoded) = 0;
     // ----------------
 
     // ----------------

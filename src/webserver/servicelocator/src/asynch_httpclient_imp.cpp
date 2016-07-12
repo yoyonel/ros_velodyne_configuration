@@ -14,13 +14,13 @@ int ASynchHTTPClientImp::perform_request(const std::string& _server)
     this->run_io_service();
 }
 
-int ASynchHTTPClientImp::handle_request_for_GET(const std::string& _server, const std::string& _path)
+int ASynchHTTPClientImp::get(const std::string& _server, const std::string& _path)
 {
     BUILD_REQUEST_GET(request_stream_, _server, _path);
     perform_request(_server);
 }
 
-int ASynchHTTPClientImp::handle_request_for_POST(const std::string& _server,
+int ASynchHTTPClientImp::post(const std::string& _server,
                                                  const std::string& _path,
                                                  const std::string& _xwwwformcoded)
 {

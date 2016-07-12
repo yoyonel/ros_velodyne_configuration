@@ -22,7 +22,7 @@ void SynchHTTPClient::get(const std::string &_server,
 {
     try
     {
-        ptrClientImp_->handle_request_for_GET(_server, _path);
+        ptrClientImp_->get(_server, _path);
     }
     catch (std::exception& e)
     {
@@ -36,7 +36,7 @@ void SynchHTTPClient::post(const std::string &_server,
 {
     try
     {
-        ptrClientImp_->handle_request_for_POST(_server, _path, _xwwwformcoded);
+        ptrClientImp_->post(_server, _path, _xwwwformcoded);
     }
     catch (std::exception& e)
     {
