@@ -51,6 +51,8 @@ int VLP16_WebServer_BOOST_ASIO_ASYNCHRONOUS::send(
         // c++11 style
         auto http_client = make_shared<ClientASynch>(io_service);
         http_client->post(network_sensor_ip_, "/cgi/setting", xwwwformcoded);
+
+        io_service.run();
     }
     catch (std::exception& e)
     {

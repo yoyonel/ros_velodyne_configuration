@@ -10,6 +10,7 @@ namespace velodyne_tools {
 namespace boost_asio {
 
 // url: http://www.boost.org/doc/libs/1_49_0/doc/html/boost_asio/example/http/client/async_client.cpp
+
 class ClientASynch : public IClient
 {
 public:
