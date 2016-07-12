@@ -1,6 +1,6 @@
 #include "asynch_httpclient_imp.h"
 #include <boost/bind.hpp>   // for: boost::bind
-
+#include <iostream>
 
 int ASynchHTTPClientImp::perform_request(const std::string& _server)
 {
