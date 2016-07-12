@@ -45,3 +45,24 @@ ros_add_library(
     DEPENDS velodyne_tools
     ADD_FLAG_FOR_CXX_11
 )
+
+
+##################################
+## Test: Service Locator
+##################################
+SET( SRC_SERVICEPROVIDERS
+    servicelocator/src/asynch_httpclient.cpp
+    servicelocator/src/asynch_httpclient_imp.cpp
+    servicelocator/src/synch_httpclient.cpp
+    servicelocator/src/synch_httpclient_imp.cpp
+)
+include_directories(servicelocator/include)
+
+ros_add_library(
+    NAME    vlp16_servicelocator
+    SRC     servicelocator/src/test_httpclient.cpp
+            ${SRC_SERVICEPROVIDERS}
+    LIBS    velodyne_tools
+    DEPENDS velodyne_tools
+    ADD_FLAG_FOR_CXX_11
+)

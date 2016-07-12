@@ -101,7 +101,7 @@ int ClientSynch::perform_request(const std::string &_server)
 int ClientSynch::handle_request_for_GET(const std::string& server, const std::string& path)
 {
     BUILD_REQUEST_GET(request_stream_, server, path);
-    //        ROS_INFO_STREAM("Request: " << request_stream);
+    ROS_INFO_STREAM("Request: " << request_stream_);
 
     return perform_request(server);
 }
@@ -114,8 +114,7 @@ int ClientSynch::handle_request_for_POST(const std::string& server, const std::s
     return perform_request(server);
 }
 
-void ClientSynch::get(const std::string& server,
-                 const std::string& path)
+void ClientSynch::get(const std::string& server, const std::string& path)
 {
     try
     {
@@ -128,8 +127,8 @@ void ClientSynch::get(const std::string& server,
 }
 
 void ClientSynch::post(const std::string& server,
-                 const std::string& path,
-                 const std::string& xwwwformcoded)
+                       const std::string& path,
+                       const std::string& xwwwformcoded)
 {
     try
     {
