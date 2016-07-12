@@ -30,7 +30,7 @@ public:
     // SERVICES
     // ----------------
     inline const std::string & get_response() const { return str_response_; }
-    inline void run() const { io_service_.run(); }
+    inline void run_io_service() const { io_service_.run(); }
     // ----------------
 
 protected:

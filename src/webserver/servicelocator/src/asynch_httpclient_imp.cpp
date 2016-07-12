@@ -11,7 +11,7 @@ int ASynchHTTPClientImp::perform_request(const std::string& _server)
                             boost::bind(&ASynchHTTPClientImp::handle_resolve, this,
                                         boost::asio::placeholders::error,
                                         boost::asio::placeholders::iterator));
-    this->run();
+    this->run_io_service();
 }
 
 int ASynchHTTPClientImp::handle_request_for_GET(const std::string& _server, const std::string& _path)
