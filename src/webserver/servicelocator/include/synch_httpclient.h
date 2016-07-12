@@ -2,7 +2,10 @@
 #define SYNCH_HTTPCLIENT_H
 
 #include "httpclient.h" // for: HTTPClient
-#include "synch_httpclient_imp.h"   // for: SynchHTTPClientImp
+#include <boost/asio.hpp>   // for: boost::asio::io_service
+
+// Prototype de la classe d'implementation
+class SynchHTTPClientImp;
 
 // ----------
 // Interfaces
@@ -10,13 +13,13 @@
 class SynchHTTPClient : public HTTPClient
 {
 public:
-    SynchHTTPClient(boost::asio::io_service& _io_service)
-        : ptrClientImp_(new SynchHTTPClientImp(_io_service)) {}
+    SynchHTTPClient(boost::asio::io_service& _io_service);
+//        : ptrClientImp_(new SynchHTTPClientImp(_io_service)) {}
 
     void get(const std::string &_server, const std::string &_path) override;
     void post(const std::string &_server, const std::string &_path, const std::string &_xwwwformcoded) override;
 
-    const std::string & get_response() const override { ptrClientImp_->get_response(); }
+    const std::string & get_response() const override;
 
 private:
     SynchHTTPClientImp * ptrClientImp_;

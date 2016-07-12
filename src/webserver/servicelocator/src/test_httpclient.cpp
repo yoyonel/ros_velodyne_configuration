@@ -26,7 +26,8 @@ void servicelocator_test(const std::string & _server, const std::string & _path)
     boost::asio::io_service io_service;
     ASynchHTTPClient *ptrASynchClient = new ASynchHTTPClient(io_service);
     SynchHTTPClient  * ptrSynchClient = new  SynchHTTPClient(io_service);
-    HTTPClient * ptrClient = ptrASynchClient;
+//    HTTPClient * ptrClient = ptrASynchClient; // ok
+    HTTPClient * ptrClient = ptrSynchClient;    // ok
 
     // On assigne un service provider au locator
     set_servicelocator(ptrClient);

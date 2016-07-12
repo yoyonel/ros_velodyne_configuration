@@ -1,6 +1,18 @@
 #include "asynch_httpclient.h"
+#include "asynch_httpclient_imp.h"  // for: SynchHTTPClientImp
 
 #define ROS_WARN_STREAM(...)
+
+ASynchHTTPClient::ASynchHTTPClient(boost::asio::io_service& _io_service)
+    : ptrClientImp_(new ASynchHTTPClientImp(_io_service))
+{
+
+}
+
+const std::string & ASynchHTTPClient::get_response() const
+{
+    ptrClientImp_->get_response();
+}
 
 void ASynchHTTPClient::get(const std::string &_server,
                            const std::string &_path)
