@@ -14,7 +14,7 @@ class SynchHTTPClient : public HTTPClient
 {
 public:
     SynchHTTPClient(boost::asio::io_service& _io_service);
-//        : ptrClientImp_(new SynchHTTPClientImp(_io_service)) {}
+    ~SynchHTTPClient();
 
     void get(const std::string &_server, const std::string &_path) override;
     void post(const std::string &_server, const std::string &_path, const std::string &_xwwwformcoded) override;

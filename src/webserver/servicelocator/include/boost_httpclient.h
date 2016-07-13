@@ -15,9 +15,15 @@ using boost::asio::ip::tcp;
 class BoostHTTPClient
 {
 public:
-    BoostHTTPClient(boost::asio::io_service& _io_service)
-        : resolver_(_io_service), socket_(_io_service), request_stream_(&request_), io_service_(_io_service)
-    { }   
+    // ----------------
+    // CONSTRUCTOR
+    // ----------------
+    BoostHTTPClient(boost::asio::io_service& _io_service);
+
+    // ----------------
+    // DESTRUCTOR
+    // ----------------
+    virtual ~BoostHTTPClient() {}
 
     // ----------------
     // PURES VIRTUALS
@@ -29,8 +35,8 @@ public:
     // ----------------
     // SERVICES
     // ----------------
-    inline const std::string & get_response() const { return str_response_; }
-    inline void run_io_service() const { io_service_.run(); }
+    const std::string & get_response() const;
+    void run_io_service() const;
     // ----------------
 
 protected:

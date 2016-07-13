@@ -19,12 +19,17 @@ public:
     ASynchHTTPClient(boost::asio::io_service& _io_service);
 
     // ----------------
+    // DESTRUCTOR
+    // ----------------
+    ~ASynchHTTPClient();
+
+    // ----------------
     // OVERRIDES
     // ----------------
     void get(const std::string &_server, const std::string &_path) override;
     void post(const std::string &_server, const std::string &_path, const std::string &_xwwwformcoded) override;
     const std::string & get_response() const override;
-    // ----------------
+    // ----------------   
 
 private:
     // ----------------

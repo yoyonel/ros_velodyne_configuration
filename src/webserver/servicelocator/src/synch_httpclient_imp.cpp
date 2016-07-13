@@ -98,7 +98,7 @@ int SynchHTTPClientImp::perform_request(const std::string& _server)
 }
 
 int SynchHTTPClientImp::get(const std::string& _server,
-                                               const std::string& _path)
+                            const std::string& _path)
 {
     BUILD_REQUEST_GET(request_stream_, _server, _path);
     ROS_INFO_STREAM("Request: " << request_stream_);
@@ -108,8 +108,8 @@ int SynchHTTPClientImp::get(const std::string& _server,
 }
 
 int SynchHTTPClientImp::post(const std::string& _server,
-                                                const std::string& _path,
-                                                const std::string& _xwwwformcoded)
+                             const std::string& _path,
+                             const std::string& _xwwwformcoded)
 {
     BUILD_REQUEST_POST(request_stream_, _server, _path, _xwwwformcoded);
     ROS_INFO_STREAM("Request: " << request_stream_);

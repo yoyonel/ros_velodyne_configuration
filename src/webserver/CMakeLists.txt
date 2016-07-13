@@ -51,16 +51,22 @@ ros_add_library(
 ## Test: Service Locator
 ##################################
 SET( SRC_SERVICEPROVIDERS
+    servicelocator/src/boost_httpclient.cpp
     servicelocator/src/asynch_httpclient.cpp
     servicelocator/src/asynch_httpclient_imp.cpp
     servicelocator/src/synch_httpclient.cpp
     servicelocator/src/synch_httpclient_imp.cpp
+    #
+    servicelocator/src/velodynewebserver.cpp
+    servicelocator/src/vlp16webserver.cpp
+    servicelocator/src/vlp16webserver_ros.cpp
 )
 include_directories(servicelocator/include)
 
 ros_add_library(
     NAME    vlp16_servicelocator
     SRC     servicelocator/src/test_httpclient.cpp
+            servicelocator/src/test_velodyne_webserver.cpp
             ${SRC_SERVICEPROVIDERS}
     LIBS    velodyne_tools
     DEPENDS velodyne_tools

@@ -4,9 +4,13 @@
 #define ROS_WARN_STREAM(...)
 
 ASynchHTTPClient::ASynchHTTPClient(boost::asio::io_service& _io_service)
-    : ptrClientImp_(new ASynchHTTPClientImp(_io_service))
 {
+    ptrClientImp_ = new ASynchHTTPClientImp(_io_service);
+}
 
+ASynchHTTPClient::~ASynchHTTPClient()
+{
+    if(ptrClientImp_) delete ptrClientImp_;
 }
 
 const std::string & ASynchHTTPClient::get_response() const

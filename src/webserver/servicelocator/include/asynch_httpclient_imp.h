@@ -27,6 +27,9 @@ public:
 
 private:
     int  perform_request(const std::string& _server);
+    // ----------------
+    // THREADS CALLBACK
+    // ----------------
     void handle_resolve(const boost::system::error_code& err, tcp::resolver::iterator endpoint_iterator);
     void handle_connect(const boost::system::error_code& err);
     void handle_write_request(const boost::system::error_code& err);

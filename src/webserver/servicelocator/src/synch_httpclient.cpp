@@ -7,9 +7,13 @@
 
 
 SynchHTTPClient::SynchHTTPClient(boost::asio::io_service& _io_service)
-    : ptrClientImp_(new SynchHTTPClientImp(_io_service))
 {
+    ptrClientImp_ = new SynchHTTPClientImp(_io_service);
+}
 
+SynchHTTPClient::~SynchHTTPClient()
+{
+    if(ptrClientImp_) delete ptrClientImp_;
 }
 
 const std::string & SynchHTTPClient::get_response() const

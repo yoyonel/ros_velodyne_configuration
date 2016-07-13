@@ -26,15 +26,15 @@ void servicelocator_test(const std::string & _server, const std::string & _path)
     boost::asio::io_service io_service;
     ASynchHTTPClient *ptrASynchClient = new ASynchHTTPClient(io_service);
     SynchHTTPClient  * ptrSynchClient = new  SynchHTTPClient(io_service);
-//    HTTPClient * ptrClient = ptrASynchClient; // ok
-    HTTPClient * ptrClient = ptrSynchClient;    // ok
+    HTTPClient * ptrClient = ptrASynchClient; // ok
+//    HTTPClient * ptrClient = ptrSynchClient;    // ok
 
     // On assigne un service provider au locator
     set_servicelocator(ptrClient);
 
     // Utilisation du Locator pour fournir un provider
     // qui nous permettra de faire une requete HTTP
-    use_servicelocator(_server, _path);
+    use_servicelocator(_server, "/cgi/setting");
 }
 
 void use_servicelocator(const std::string & _server, const std::string & _path)
@@ -44,6 +44,9 @@ void use_servicelocator(const std::string & _server, const std::string & _path)
     HTTPClient *client = LocatorHTTPClient::getHTTPClient();
     client->get(_server, _path);
     ROS_INFO_STREAM("client->get_response(): " << client->get_response());
+
+    // test post
+    client->post(_server, _path, "rpm=444");    // ok: pour Synch & ASynch
 }
 
 void set_servicelocator(HTTPClient* service_provider_)

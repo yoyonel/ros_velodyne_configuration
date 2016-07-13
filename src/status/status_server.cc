@@ -16,6 +16,8 @@ int main(int argc, char **argv)
     servicelocator_test("172.20.0.191", "/cgi/status.json");
     servicelocator_test("172.20.0.191", "/cgi/settings.json");
     servicelocator_test("172.20.0.191", "/cgi/diag.json");
+    // ---------------
+    test_velodyne_webserver("172.20.0.191");
     // ----------------------------
 
     vlp16_webserver_services::Velodyne_WebServer_Status v_ws_s;

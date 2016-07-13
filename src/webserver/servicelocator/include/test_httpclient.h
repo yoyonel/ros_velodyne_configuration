@@ -4,7 +4,6 @@
 #include <iostream>
 
 void servicelocator_test(const std::string & _server, const std::string & _path);
-//void use_servicelocator(const std::string & _server, const std::string & _path);
-//void set_servicelocator(HTTPClient* service_provider_);
+void test_velodyne_webserver(const std::string & _server);
 
 #endif // TEST_HTTPCLIENT_H
