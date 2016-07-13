@@ -15,10 +15,16 @@ void VLP16WebServer::init()
 {
     // url: http://aantron.github.io/better-enums/tutorial/Iteration.html
     for (auto name : eVLP16WebServerRequests::_names())
-        map_requests_get_[name] = std::string("/cgi/") + std::string(name) + std::string(".json");
+        map_requests_get_[name] = build_path_for_get(name);
+
 }
 
-std::string VLP16WebServer::generate_path_for_get(const std::string _request_name) const
+std::string VLP16WebServer::build_path_for_get(const std::string _request_name)
+{
+    return std::string("/cgi/") + std::string(_request_name) + std::string(".json");
+}
+
+std::string VLP16WebServer::get_path_for_get(const std::string _request_name) const
 {
     std::string path="";
     try {
@@ -34,7 +40,7 @@ std::string VLP16WebServer::get(const std::string &_request_name)
 {
     std::string response="";
     try {
-        const std::string path = generate_path_for_get(_request_name);
+        const std::string path = get_path_for_get(_request_name);
         ptr_httpclient->get(network_sensor_ip_, path);
         response = ptr_httpclient->get_response();
     }
@@ -49,10 +55,15 @@ std::string VLP16WebServer::get(eVLP16WebServerRequests _request_id)
     return get(_request_id._to_string());
 }
 
+std::string VLP16WebServer::build_path_for_post()
+{
+    return std::string("/cgi/setting");
+}
+
 void VLP16WebServer::post(const std::string &_xwwwformcoded)
 {
     try {
-        const std::string path = "/cgi/setting";
+        const std::string path = build_path_for_post();
         ptr_httpclient->post(network_sensor_ip_, path, _xwwwformcoded);
     }
     catch(std::exception &exc)

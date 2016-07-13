@@ -17,16 +17,36 @@ BETTER_ENUM( eVLP16WebServerRequests, uint8_t,
 
 class VLP16WebServer : public VelodyneWebServer {
 public:
+    // ----------------
+    // CONSTRUCTOR
+    // ----------------
     VLP16WebServer(HTTPClient * _ptrHTTPClient, const std::string & _network_sensor_ip="");
+    // ----------------
+    // VIRTUAL DESTRUCTOR
+    // ----------------
+    ~VLP16WebServer() {}
 
+    // ----------------
+    // OVERRIDES
+    // ----------------
     std::string get(const std::string &_request_name) override;
     virtual void post(const std::string &_xwwwformcoded) override;
 
+    // ----------------
+    // SERVICE
+    // ----------------
     std::string get(eVLP16WebServerRequests _request_id);
+
+    // ----------------
+    // STATICS
+    // ----------------
+    static inline std::string build_path_for_get(const std::string _request_name);
+    static inline std::string build_path_for_post();
 
 private:
     void init();
-    std::string generate_path_for_get(const std::string _request_name) const;
+    std::string get_path_for_get(const std::string _request_name) const;
+
 
 private:
     std::map<std::string, std::string> map_requests_get_;

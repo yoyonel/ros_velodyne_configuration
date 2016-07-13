@@ -16,6 +16,7 @@ void use_servicelocator(const std::string & _server, const std::string & _path);
 // ----------------
 // Test
 // ----------------
+// TODO: Mettre en place les timeouts sur les requetes !!!
 
 void servicelocator_test(const std::string & _server, const std::string & _path)
 {
