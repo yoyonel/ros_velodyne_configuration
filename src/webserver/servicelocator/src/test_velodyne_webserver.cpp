@@ -25,7 +25,7 @@ void test_velodyne_webserver(const std::string & _server)
     response = ptrVelodyneWebServer->get("settings");
     response = ptrVelodyneWebServer->get("diag");
     response = ptrVelodyneWebServer->get("toto");
-    response = ptrVelodyneWebServer->get(VLP16WebServer::eVLP16WebServerRequests::settings);
+    response = ptrVelodyneWebServer->get(eVLP16WebServerRequests::settings);
 
     ptrVelodyneWebServer->post("rpm=333");    // ok with ASynch&Synch
 

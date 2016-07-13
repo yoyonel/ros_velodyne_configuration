@@ -7,7 +7,7 @@
 #include <map>  // for: std:map
 
 
-BETTER_ENUM( _eVLP16WebServerRequests_, uint8_t,
+BETTER_ENUM( eVLP16WebServerRequests, uint8_t,
              settings=1,
              status,
              info,
@@ -16,9 +16,6 @@ BETTER_ENUM( _eVLP16WebServerRequests_, uint8_t,
 
 
 class VLP16WebServer : public VelodyneWebServer {
-public:
-    typedef _eVLP16WebServerRequests_ eVLP16WebServerRequests;
-
 public:
     VLP16WebServer(HTTPClient * _ptrHTTPClient, const std::string & _network_sensor_ip="");
 
