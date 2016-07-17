@@ -73,6 +73,7 @@ SET( SRC_PARSER_JSON
 #MESSAGE(CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(servicelocator/include)
+include_directories(../../../json_lib/src/)
 
 ##
 #MESSAGE(Add flags for SRC_HTTPCLIENT)

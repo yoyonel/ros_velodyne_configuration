@@ -11,7 +11,8 @@
 
 // url: https://github.com/nlohmann/json
 #define private public
-#include "../third/json/src/json.hpp"
+//#include "../../json_lib/src/json.hpp"
+#include <json.hpp>
 using nlohmann::json;
 //
 //using namespace boost::property_tree;
