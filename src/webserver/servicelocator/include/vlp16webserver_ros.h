@@ -20,7 +20,7 @@ public:
     VLP16WebServerROS(HTTPClient * _ptrHTTPClient, const std::string & _network_sensor_ip="");
 
     void post(const VLP16_settingsConfig& _vlp16config);
-    inline void post(const std::string &_xwwwformcoded) override { VLP16WebServer::post(_xwwwformcoded); }
+    inline void post(const std::string &_xwwwformcoded) override { VelodyneWebServerMeta::post(_xwwwformcoded); }
 
 private:
     static std::string convert_config_to_xwwwformcoded(const VLP16_settingsConfig& _config);

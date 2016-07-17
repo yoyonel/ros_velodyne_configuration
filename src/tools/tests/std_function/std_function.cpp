@@ -3,7 +3,7 @@
  
 int f(int, int) { return 1; }
 int g(int, int) { return 2; }
-void test(std::function<int(int, int)> const& arg)
+void test_parser_json(std::function<int(int, int)> const& arg)
 {
     std::cout << "test function: ";
     if (arg.target<std::plus<int>>())
@@ -20,8 +20,8 @@ void test(std::function<int(int, int)> const& arg)
  
 int main()
 {
-    test(std::function<int(int, int)>(std::plus<int>()));
-    test(std::function<int(int, int)>(std::minus<int>()));
-    test(std::function<int(int, int)>(f));
-    test(std::function<int(int, int)>(g));
+    test_parser_json(std::function<int(int, int)>(std::plus<int>()));
+    test_parser_json(std::function<int(int, int)>(std::minus<int>()));
+    test_parser_json(std::function<int(int, int)>(f));
+    test_parser_json(std::function<int(int, int)>(g));
 }

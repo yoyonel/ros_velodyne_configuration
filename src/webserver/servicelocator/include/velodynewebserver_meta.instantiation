@@ -1,0 +1,26 @@
+#ifndef VELODYNEWEBSERVERMETA_INSTANTION
+#define VELODYNEWEBSERVERMETA_INSTANTION
+
+
+#include "vlp16webserver.h" // for: VLP16WebServer
+#include <cstddef>  // for: nullptr
+
+
+// url: http://www.codeproject.com/Articles/48575/How-to-define-a-template-class-in-a-h-file-and-imp
+// -> method 1 : Dummy methode d'utilisation/instanciation
+// A priori, il faut 'utiliser' toute les méthodes qui exploitent le type template.
+// Ces méthodes seront alors instanciées, et utilisables de l'extérieures.
+// Dans notre cas, il faut instancier:
+// - le constructor 'VLP16WebServer'
+// - la fonction membre template 'template<eCmd> VLP16WebServer<eCmd>::get(eCmd)'
+// L'avantage de cette méthode est de conserver la séparation/non influence entre
+// la déclaration (vlp16webserver.h) et l'implémentation (dans vlp16webserver.cpp).
+void TemporaryFunction()
+{
+    // Instanciations for:
+    // - VLP16WebServer
+    VLP16WebServer VLP16WebServer(nullptr);
+    VLP16WebServer.get(eVLP16WebServerRequests::status);
+}
+
+#endif // VELODYNEWEBSERVERMETA_INSTANTION

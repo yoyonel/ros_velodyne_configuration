@@ -59,8 +59,8 @@ namespace velodyne_tools
 #define JSON_READ_STATE(_json_root, _json_child, _ros_res, _ros_msg_child)   \
     JSON_READ_STRING(_json_root, _json_child, _ros_res, _ros_msg_child) == "Enabled"
 
-#define JSON_READ_STRING(_json_root, _json_child, _ros_res, _ros_msg_child)   \
-    JSON_READ(_json_root, _json_child, _ros_res, _ros_msg_child, std::string)
+//#define JSON_READ_STRING(_json_root, _json_child, _ros_res, _ros_msg_child)   \
+//    JSON_READ(_json_root, _json_child, _ros_res, _ros_msg_child, std::string)
 //---------------------------------------------------------------------------
 
 std::string exec_cmd(const char* cmd);

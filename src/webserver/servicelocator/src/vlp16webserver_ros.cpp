@@ -11,7 +11,7 @@ using namespace velodyne_configuration;
 
 
 VLP16WebServerROS::VLP16WebServerROS(HTTPClient * _ptrHTTPClient, const std::string & _network_sensor_ip)
-    : VLP16WebServer(_ptrHTTPClient, _network_sensor_ip)
+    : VelodyneWebServerMeta(_ptrHTTPClient, _network_sensor_ip)
 {
 }
 
