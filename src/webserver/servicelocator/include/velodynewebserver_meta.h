@@ -45,5 +45,6 @@ private:
     std::map<std::string, std::string> map_requests_get_;
 };
 
+#include "velodynewebserver_meta.instantiation"
 
 #endif // VELODYNEWEBSERVER_META_H

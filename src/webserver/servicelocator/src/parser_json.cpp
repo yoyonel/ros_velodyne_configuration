@@ -131,11 +131,11 @@ public:
         std::get<1>(map_childs_values2[path_]) = idtype_return;
         //
         map_results_with_any_[path_] = Any<type_return>(value);
-//        save(path_, value);
+        //        save(path_, value);
     }
 
-//    template<typename T>
-//    void save(const std::string &path_, const T & value_);
+    //    template<typename T>
+    //    void save(const std::string &path_, const T & value_);
 
     template<typename T>
     void add_child(const std::string & _name)
@@ -152,15 +152,15 @@ public:
     template<typename T>
     T get_child_value(const std::string & _name)
     {
-//        map_functions_.at(_name)();
-//        return static_cast<Any<T>&>(*map_childs_values[_name]).data;
+        //        map_functions_.at(_name)();
+        //        return static_cast<Any<T>&>(*map_childs_values[_name]).data;
         return boost::get<Any<T>>(map_results_with_any_[_name]).data;
     }
 
     template<typename T>
     void get_child_value(const std::string & _name, T & _value)
     {
-//        map_functions_.at(_name)();
+        //        map_functions_.at(_name)();
         _value = boost::get<Any<T>>(map_results_with_any_[_name]).data;
     }
 
@@ -173,43 +173,43 @@ public:
     }
 
 
-//    void get_child_value2(const std::string & _name, bool * _value)
-//    {
-//        map_functions_.at(_name)();
-//        switch(std::get<1>(map_childs_values2[_name])) {
-//        case 0:
-//        {
-//            uint16_t * ptrValue = reinterpret_cast<uint16_t*>(_value);
-//            *ptrValue = static_cast<Any<uint16_t>&>(*map_childs_values[_name]).data;
-//        }
-//            break;
-//        case 1:
-//        {
-//            uint8_t * ptrValue = reinterpret_cast<uint8_t*>(_value);
-//            *ptrValue = static_cast<Any<uint8_t>&>(*map_childs_values[_name]).data;
-//        }
-//            break;
-//        case 2:
-//        {
-//            std::string * ptrValue = reinterpret_cast<std::string*>(_value);
-//            *ptrValue = static_cast<Any<std::string>&>(*map_childs_values[_name]).data;
-//        }
-//            break;
-//        case 3:
-//        {
-//            bool * ptrValue = reinterpret_cast<bool*>(_value);
-//            *ptrValue = static_cast<Any<bool>&>(*map_childs_values[_name]).data;
-//        }
-//            break;
-//        case 4:
-//        {
-//            bool * ptrValue = reinterpret_cast<bool*>(_value);
-//            *ptrValue = static_cast<Any<bool>&>(*map_childs_values[_name]).data;
-//        }
-//        }
+    //    void get_child_value2(const std::string & _name, bool * _value)
+    //    {
+    //        map_functions_.at(_name)();
+    //        switch(std::get<1>(map_childs_values2[_name])) {
+    //        case 0:
+    //        {
+    //            uint16_t * ptrValue = reinterpret_cast<uint16_t*>(_value);
+    //            *ptrValue = static_cast<Any<uint16_t>&>(*map_childs_values[_name]).data;
+    //        }
+    //            break;
+    //        case 1:
+    //        {
+    //            uint8_t * ptrValue = reinterpret_cast<uint8_t*>(_value);
+    //            *ptrValue = static_cast<Any<uint8_t>&>(*map_childs_values[_name]).data;
+    //        }
+    //            break;
+    //        case 2:
+    //        {
+    //            std::string * ptrValue = reinterpret_cast<std::string*>(_value);
+    //            *ptrValue = static_cast<Any<std::string>&>(*map_childs_values[_name]).data;
+    //        }
+    //            break;
+    //        case 3:
+    //        {
+    //            bool * ptrValue = reinterpret_cast<bool*>(_value);
+    //            *ptrValue = static_cast<Any<bool>&>(*map_childs_values[_name]).data;
+    //        }
+    //            break;
+    //        case 4:
+    //        {
+    //            bool * ptrValue = reinterpret_cast<bool*>(_value);
+    //            *ptrValue = static_cast<Any<bool>&>(*map_childs_values[_name]).data;
+    //        }
+    //        }
 
-//        //        return static_cast<Any<T>&>(*map_childs_values[_name]).data;
-//    }
+    //        //        return static_cast<Any<T>&>(*map_childs_values[_name]).data;
+    //    }
 
 
     void cout_map()
@@ -340,8 +340,8 @@ bool ParserJSON::get_child_value(const std::string & _name)
 void test_parser_json()
 {
     std::string settings_json = " {\"laser\":\"On\",\"returns\":\"Strongest\",\"rpm\":300,\"fov\":{\"start\":0,\"end\":359},\"phaselock\":{\"enabled\":\"Off\",\"offset\":\"0\"},\
-                                \"host\":{\"addr\":\"172.20.0.215\",\"dport\":\"2368\",\"tport\":\"8308\"},\
-                                \"net\":{\"addr\":\"192.168.1.201\",\"mask\":\"255.255.255.0\",\"gateway\":\"192.168.1.1\",\"dhcp\":\"Off\"} }";
+            \"host\":{\"addr\":\"172.20.0.215\",\"dport\":\"2368\",\"tport\":\"8308\"},\
+            \"net\":{\"addr\":\"192.168.1.201\",\"mask\":\"255.255.255.0\",\"gateway\":\"192.168.1.1\",\"dhcp\":\"Off\"} }";
 
     ParserJSON parser(settings_json);
 
@@ -360,7 +360,7 @@ void test_parser_json()
     parser.update();
 
     std::cout << "laser: " << parser.get_child_value<bool>("laser") << std::endl;
-//    std::cout << "laser: " << parser.get_child_value<int>("laser") << std::endl;
+    //    std::cout << "laser: " << parser.get_child_value<int>("laser") << std::endl;
     std::cout << "returns: " << parser.get_child_value<std::string>("returns") << std::endl;
     std::cout << "fov.start: " << parser.get_child_value<uint16_t>("fov.start") << std::endl;
     std::cout << "fov.end: " << parser.get_child_value<uint16_t>("fov.end") << std::endl;
@@ -379,10 +379,10 @@ void test_parser_json()
     std::cout << "fov.end: " << ui_fov_end << std::endl;
     std::cout << std::endl;
 
-//    auto j2 = " {\"laser\":\"On\",\"returns\":\"Strongest\",\"rpm\":300,\"fov\":{\"start\":0,\"end\":359},\"phaselock\":{\"enabled\":\"Off\",\"offset\":\"0\"},\
-//              \"host\":{\"addr\":\"172.20.0.215\",\"dport\":\"2368\",\"tport\":\"8308\"},\
-//              \"net\":{\"addr\":\"192.168.1.201\",\"mask\":\"255.255.255.0\",\"gateway\":\"192.168.1.1\",\"dhcp\":\"Off\"} }"_json;
-//    auto j2 = json::parse(reinterpret_cast<const nlohmann::json::string_t::value_type*>(settings_json.c_str()));
+    //    auto j2 = " {\"laser\":\"On\",\"returns\":\"Strongest\",\"rpm\":300,\"fov\":{\"start\":0,\"end\":359},\"phaselock\":{\"enabled\":\"Off\",\"offset\":\"0\"},\
+    //              \"host\":{\"addr\":\"172.20.0.215\",\"dport\":\"2368\",\"tport\":\"8308\"},\
+    //              \"net\":{\"addr\":\"192.168.1.201\",\"mask\":\"255.255.255.0\",\"gateway\":\"192.168.1.1\",\"dhcp\":\"Off\"} }"_json;
+    //    auto j2 = json::parse(reinterpret_cast<const nlohmann::json::string_t::value_type*>(settings_json.c_str()));
     auto j2 = json::parse(settings_json);
 
     // range-based for
