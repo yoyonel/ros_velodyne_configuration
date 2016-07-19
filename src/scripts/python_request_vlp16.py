@@ -64,7 +64,7 @@ def print_request(r):
         print "Unexpected error:", sys.exc_info()[0]
 
 
-def version_getopt(argv):
+def parse_arguments(argv):
 
     NETWORK_SENSOR_IP = "172.20.0.191"
     SERVICE = "status"
@@ -98,7 +98,7 @@ def version_getopt(argv):
 
 
 def main(argv):
-    version_getopt(argv)
+    parse_arguments(argv)
 
 
 if __name__ == "__main__":
