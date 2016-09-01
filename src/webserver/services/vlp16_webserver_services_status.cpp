@@ -13,22 +13,22 @@ Velodyne_WebServer_Status::Velodyne_WebServer_Status(
 {
 }
 
-bool Velodyne_WebServer_Status::get_response(velodyne_configuration::VLP16_StatusServiceResponse &_res)
+/**
+ * @brief Velodyne_WebServer_Status::get_response
+ * @param _res
+ * @return
+ */
+bool Velodyne_WebServer_Status::get_response(velodyne_configuration::VLP16_StatusServiceResponse& _res)
 {
     const std::string res_request = request(velodyne_webserver::Velodyne_WebServer::WebServerCommands::status);
     ROS_INFO_STREAM("response from VLP webserver: " << res_request );
-    return parse_JSON(res_request, _res);
+    return res_request.empty() ? false : parse_JSON(res_request, _res);
 }
 
 void Velodyne_WebServer_Status::run()
 {
     // url: http://fr.cppreference.com/w/cpp/language/lambda
-    Velodyne_WebServer_Services<
-//            velodyne_configuration::VLP16_StatusService,
-//            velodyne_configuration::VLP16_StatusMessage,
-//            velodyne_configuration::VLP16_StatusServiceResponse
-            TTripletROS_Status
-            >::run(
+    Velodyne_WebServer_Services<TTripletROS_Status>::run(
                 boost::function<bool()>( [this](){ return velodyne_service_pub_.getNumSubscribers() != 0; } )
                 );
 }
@@ -74,7 +74,7 @@ bool Velodyne_WebServer_Status::parse_JSON(const std::string & _res_request, VLP
     }
     catch (std::exception const& e)
     {
-        ROS_ERROR_STREAM(e.what());
+        ROS_ERROR_STREAM("[Velodyne_WebServer_Status::parse_JSON] Exception: " << e.what());
         return false;
     }
     // ------------------------------------

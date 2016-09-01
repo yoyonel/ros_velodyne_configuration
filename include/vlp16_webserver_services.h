@@ -15,7 +15,7 @@ struct value_type
     typedef typename T::value_type type;
 };
 
-template< class CRosService, class CRosMessage, class CRosResponse >
+template <class CRosService, class CRosMessage, class CRosResponse>
 struct TTripletROS {
     typedef typename value_type<CRosService>::type value_type_rosservice;
     typedef typename value_type<CRosMessage>::type value_type_rosmessage;
