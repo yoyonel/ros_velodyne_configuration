@@ -73,7 +73,10 @@ SET( SRC_PARSER_JSON
 #MESSAGE(CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(servicelocator/include)
-include_directories(../../../json_lib/src/)
+
+MESSAGE(NLOHMANNJSON_INCLUDE_DIRS: ${NLOHMANNJSON_INCLUDE_DIRS})
+include_directories(NLOHMANNJSON_INCLUDE_DIRS)
+# include_directories(../../../json_lib/src/)
 
 ##
 #MESSAGE(Add flags for SRC_HTTPCLIENT)
@@ -106,3 +109,13 @@ ros_add_library(
     DEPENDS velodyne_tools
     ADD_FLAG_FOR_CXX_11
 )
+
+########################################
+# 3rd party dependance: NlohmannJSON lib
+########################################
+MESSAGE(NlohmannJSON_INCLUDE_DIRS: ${NlohmannJSON_INCLUDE_DIRS})
+# On gere la dependance par rapport au repertoire include du project
+# ce n'est pas super propre d'un point de vue CMake spirit.
+target_include_directories(vlp16_servicelocator INTERFACE ${NlohmannJSON_INCLUDE_DIRS})
+include_directories(${NlohmannJSON_INCLUDE_DIRS})
+########################################

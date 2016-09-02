@@ -1,0 +1,28 @@
+SET(EXT_PROJECT_NAME NlohmannJSON)
+
+include(ExternalProject)
+
+# Builds external third party projects.
+# The parent script needs to define the "GLOBAL_OUTPUT_PATH" variable,
+# which will be used as output directory for all *.lib, *.dll, *.a, *.so, *.pdb files.
+
+###############################################################################
+# 
+###############################################################################
+ExternalProject_Add(
+  ${EXT_PROJECT_NAME}
+
+  GIT_REPOSITORY "git@github.com:nlohmann/json.git"
+  GIT_TAG "master"
+  
+  UPDATE_COMMAND ""
+  PATCH_COMMAND ""
+  
+  SOURCE_DIR "${CMAKE_SOURCE_DIR}/3rdparty/${EXT_PROJECT_NAME}"
+  CMAKE_ARGS -DBuildTests=OFF -DCMAKE_INSTALL_PREFIX=${GLOBAL_OUTPUT_PATH}/${EXT_PROJECT_NAME}
+  
+  TEST_COMMAND ""
+)
+
+# INCLUDE_DIRS
+SET(${EXT_PROJECT_NAME}_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/3rdparty/NlohmannJSON/src/")

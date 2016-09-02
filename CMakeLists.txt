@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
+
 project(velodyne_configuration)
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${PROJECT_SOURCE_DIR}/cmake")
@@ -81,6 +82,13 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
+
+# 3rdparty Libraries
+MESSAGE(CATKIN_PACKAGE_SHARE_DESTINATION: ${CATKIN_PACKAGE_SHARE_DESTINATION})
+SET(GLOBAL_OUTPUT_PATH ${CATKIN_PACKAGE_SHARE_DESTINATION})
+include(CMakeLists-ExternalProjects.txt)
+
+
 add_subdirectory(src/tools)
 
 add_subdirectory(src/settings)
@@ -96,6 +104,7 @@ add_subdirectory(src/webserver)
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark cpp header files for installation
+## Specify additional locations of header files
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
@@ -111,3 +120,4 @@ install(FILES
   # myfile2
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
+MESSAGE(CATKIN_PACKAGE_SHARE_DESTINATION: ${CATKIN_PACKAGE_SHARE_DESTINATION})
