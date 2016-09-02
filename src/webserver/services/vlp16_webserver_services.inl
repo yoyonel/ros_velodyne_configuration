@@ -2,7 +2,6 @@
 
 namespace vlp16_webserver_services {
 
-
 #define DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES_CONSTRUCTOR()                                       \
     template<typename TripletTypes, class TWebServerConnectionType>                                 \
     Velodyne_WebServer_Services<TripletTypes, TWebServerConnectionType>::Velodyne_WebServer_Services
@@ -68,10 +67,14 @@ DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES(void, run)(
     //----------------------------------------
 }
 
+/**
+ * @brief DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES
+ */
 DECL_TEMPLATE_VELODYNEWEBSERVERSERVICES(void, run_with_test_sub)(
         boost::function<void()> _postPublish
         )
 {
     run( boost::function<bool()>( [this](){ return velodyne_service_pub_.getNumSubscribers() != 0; }, _postPublish ) );
 }
+
 }
