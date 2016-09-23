@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(velodyne_configuration)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS YES)
+
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${PROJECT_SOURCE_DIR}/cmake")
 MESSAGE(STATUS PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR})
 include(cmake_tools)
