@@ -11,19 +11,19 @@
   <arg name="model" default="VLP16" doc="Nom du modele du sensor"/>
 
   <!-- start -->
-  <include file="$(find velodyne_configuration)/server_status.launch">
+  <include file="$(find velodyne_configuration)/launch/server_status.launch">
     <arg name="model" value="$(arg model)"/>
     <arg name="VLP16_NETWORK_SENSOR_IP" value="$(arg VLP16_NETWORK_SENSOR_IP)"/>
   </include>
 
   <!-- start -->
-  <include file="$(find velodyne_configuration)/server_settings.launch">
+  <include file="$(find velodyne_configuration)/launch/server_settings.launch">
     <arg name="model" value="$(arg model)"/>
     <arg name="VLP16_NETWORK_SENSOR_IP" value="$(arg VLP16_NETWORK_SENSOR_IP)"/>
   </include>
 
   <!-- start -->
-  <include file="$(find velodyne_configuration)/server_diagnostics.launch">
+  <include file="$(find velodyne_configuration)/launch/server_diagnostics.launch">
     <arg name="model" value="$(arg model)"/>
     <arg name="VLP16_NETWORK_SENSOR_IP" value="$(arg VLP16_NETWORK_SENSOR_IP)"/>
   </include>
